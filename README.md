@@ -1,6 +1,6 @@
 # digital-electronics-1
 
-Repository of homework and assignments from DE1 course during my studies at Brno University of Technology.
+Repository of homework and assignments from DE1 course at Brno University of Technology.
 Worked on by Jakub Lepik.
 
 **Homework**
