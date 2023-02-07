@@ -57,5 +57,5 @@ end architecture dataflow;
 
 Screenshot with simulated time waveforms for both sides of ***First Distributive law*** equation:
 	
-![figure - FDL](/images/figure_fdl.png)
+![figure - FDL](images/figure_fdl.png)
 
