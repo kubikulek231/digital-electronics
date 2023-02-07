@@ -1,25 +1,12 @@
-# digital-electronics
+# digital-electronics-1
 
-***made in DE1 course***
+repository of homework and assignments from DE1 course
 
+**Homework**
 <ol>
-  <li>First item</li>
-  <li>Second item</li>
-  <li>Third item
-    <ol>
-      <li>Indented item</li>
-      <li>Indented item</li>
-    </ol>
-  </li>
-  <li>Fourth item</li>
+  <li>01-gates</li>
 </ol>
 
-link to a website with some basic MD syntax guide :)
+MD syntax guide *[here](https://www.markdownguide.org/basic-syntax/)*.
 
-This is the *[Markdown Guide](https://www.markdownguide.org/basic-syntax/)*.
-
-This **word** is bold. This <em>word</em> is italic.
-
-![lmao](/image.png "spongebob")
-
-test
+![image for better looks](/image.png)
