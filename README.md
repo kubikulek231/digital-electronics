@@ -14,4 +14,4 @@
   <li>Fourth item</li>
 </ol>
 
-This is the *[Markdown Guide](https://www.markdownguide.org)*.
+This is the *[Markdown Guide](https://www.markdownguide.org/basic-syntax/)*.
