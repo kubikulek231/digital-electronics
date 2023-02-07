@@ -55,6 +55,5 @@ begin
 end architecture dataflow;
 ```
 
-Screenshot with simulated time waveforms for both sides of ***First Distributive law*** equation:
-	
 	![Logic function](images/equations.png)
+Screenshot with simulated time waveforms for both sides of ***First Distributive law*** equation:
