@@ -10,4 +10,4 @@ Worked on by Jakub Lepik.
 
 MD syntax guide *[here](https://www.markdownguide.org/basic-syntax/)*.
 
-![image for better looks](/image.png)
+![image for better looks](images/image.png)
