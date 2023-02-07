@@ -4,7 +4,7 @@
 
 1. Equations of all three versions of logic function f(c,b,a):
 
-![Logic function](images/figure_equations.png)
+	![Logic function](images/equations.png)
 
 2. Listing of VHDL architecture from design file (`design.vhd`) for all three functions. Always use syntax highlighting, meaningful comments, and follow VHDL guidelines:
 
@@ -35,8 +35,18 @@ end architecture dataflow;
 
 1. Screenshot with simulated time waveforms. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
-   ![figure](images/figure_fdl.png)
+   ![figure](images/figure_equations.png)
+
+3. Link to your public EDA Playground example:
+
+   [https://www.edaplayground.com/x/Ley9](https://www.edaplayground.com/x/Ley9)
    
+### Experiments on your own
+
+1. In EDA Playground, verify at least one of the Distributive laws:
+
+Listing of VHDL architecture from design file (`design.vhd`) for both sides of ***First Distributive law*** equation:
+
 ```vhdl
 architecture dataflow of gates is
 begin
@@ -45,6 +55,6 @@ begin
 end architecture dataflow;
 ```
 
-2. Link to your public EDA Playground example:
-
-   [https://www.edaplayground.com/x/Ley9](https://www.edaplayground.com/x/Ley9)
+Screenshot with simulated time waveforms for both sides of ***First Distributive law*** equation:
+	
+	![figure](images/figure_fdl.png)
