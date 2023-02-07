@@ -19,3 +19,5 @@ link to a website with some basic MD syntax guide :)
 This is the *[Markdown Guide](https://www.markdownguide.org/basic-syntax/)*.
 
 This **word** is bold. This <em>word</em> is italic.
+
+[![lmao](/assets/images//image.png "spongebob"))
