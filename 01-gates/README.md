@@ -35,7 +35,7 @@ end architecture dataflow;
 
 1. Screenshot with simulated time waveforms. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
-   ![figure](images/figure_equations.png)
+   ![figure - equations](images/figure_equations.png)
 
 3. Link to your public EDA Playground example:
 
@@ -57,4 +57,4 @@ end architecture dataflow;
 
 Screenshot with simulated time waveforms for both sides of ***First Distributive law*** equation:
 	
-	![figure](images/figure_fdl.png)
+	![figure - First Distributive law](images/figure_fdl.png)
