@@ -17,7 +17,7 @@ begin
     f_nor_o <= (not(a_i) nor (b_i));
 end architecture dataflow;
 ```
-
+	![Logic function](images/equations.png)
 3. Complete table with logic functions' values:
 
    | **c** | **b** |**a** | **f_ORIG** | **f_(N)AND** | **f_(N)OR** |
