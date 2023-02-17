@@ -51,7 +51,7 @@
 
 
 
-#02-logic
+#HOMEWORK
 *Digital* or *Binary comparator* compares the digital signals A, B presented at input terminal and produce outputs depending upon the condition of those inputs.
 
 1. Complete the truth table for 2-bit *Identity comparator* (B equals A), and two *Magnitude comparators* (B is greater than A, B is less than A). Note that, such a digital device has four inputs and three outputs/functions.
@@ -75,4 +75,3 @@
    | 14 | 1 1 | 1 0 | 1 | 0 | 0 |
    | 15 | 1 1 | 1 1 | 0 | 1 | 0 |
 
-2. K-map
