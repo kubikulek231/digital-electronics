@@ -9,6 +9,7 @@ Derived from *[here](https://github.com/tomas-fryza/digital-electronics-1.git)*.
 <ol>
   <li>01-gates</li>
   <li>02-logic</li>
+  <li>03-vivado</li>
 </ol>
 
 MD syntax guide *[here](https://www.markdownguide.org/basic-syntax/)*.
