@@ -1,13 +1,4 @@
 ------------------------------------------------------------
---
--- Testbench for 2-bit binary comparator.
--- EDA Playground
---
--- Copyright (c) 2020 Tomas Fryza
--- Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
--- This work is licensed under the terms of the MIT license.
---
-------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -22,28 +13,30 @@ end entity tb_mux_3bit_4to1;
 ------------------------------------------------------------
 -- Architecture body for testbench
 ------------------------------------------------------------
-architecture testbench of mux_3bit_4to1 is
+architecture testbench of tb_mux_3bit_4to1 is
 
     -- Local signals
-    signal s_a           : std_logic_vector(3 downto 0);
-    signal s_b           : std_logic_vector(3 downto 0);
-    signal s_c           : std_logic_vector(3 downto 0);
-    signal s_d           : std_logic_vector(3 downto 0);
-    signal s_sel_i        : std_logic_vector(1 downto 0);
-    signal s_B_less_A    : std_logic;
-    -- todo: each input needs a signal - signal is just for the testbench, was it for implementing it for the bord, we would not need them... :)
+    signal s_a           : std_logic_vector(2 downto 0);
+    signal s_b           : std_logic_vector(2 downto 0);
+    signal s_c           : std_logic_vector(2 downto 0);
+    signal s_d           : std_logic_vector(2 downto 0);
+    signal s_f_o         : std_logic_vector(2 downto 0);
+    signal s_sel_i       : std_logic_vector(1 downto 0);
+    -- todo: each input needs a signal - signal is just for the testbench
+    -- was it for uploading to the board itself we would not need them at all... :)
 
 begin
-    -- Connecting testbench signals with comparator_2bit
+
+    -- Connecting testbench signals with mux_3bit_4to1
     -- entity (Unit Under Test)
     uut_mux_3bit_4to1 : entity work.mux_3bit_4to1
         port map(
-            sel_i => "00",
-            a_i           => s_a,
-            b_i           => s_b,
---            B_greater_A_o => s_B_greater_A,
---            B_equals_A_o  => s_B_equals_A,
-            B_less_A_o    => s_B_less_A
+            a_i   => s_a,
+            b_i   => s_b,
+            c_i   => s_c,
+            d_i   => s_d,
+            f_o   => s_f_o,
+            sel_i => s_sel_i
         );
 
     --------------------------------------------------------
@@ -51,10 +44,36 @@ begin
     --------------------------------------------------------
     p_stimulus : process
     begin
+    
         -- Report a note at the beginning of stimulus process
         report "Stimulus process started";
+        
+        -- multiplexer inputs set up
+        s_a    <= "000"; 
+        s_b    <= "001";
+        s_c    <= "011";
+        s_d    <= "111";
+        
+        -- selecting input a_i
+        s_sel_i <= "00";
+        wait for 100 ns;
+        
+        -- selecting input b_i
+        s_sel_i <= "01";
+        wait for 100 ns;
+        
+        -- selecting input c_i
+        s_sel_i <= "10";
+        wait for 100 ns;
+        
+        -- selecting input d_i
+        s_sel_i <= "11";
+        wait for 100 ns;
+        
         report "Stimulus process finished";
+        
         wait; -- Data generation process is suspended forever
+        
     end process p_stimulus;
 
 end architecture testbench;
