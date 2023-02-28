@@ -55,8 +55,6 @@ hex2seg : entity work.hex_7seg
       hex    => SW,
       seg(6) => CA,
       seg(5) => CB,
-
-      -- WRITE YOUR CODE HERE
       seg(4) => CC,
       seg(3) => CD,
       seg(2) => CE,
@@ -65,7 +63,7 @@ hex2seg : entity work.hex_7seg
     );
     
 -- Connect one common anode to 3.3V
-AN <= b"1111_0111";
+AN <= b"1011_1111";
 
 -- Display input value on LEDs
 LED(3 downto 0) <= SW;

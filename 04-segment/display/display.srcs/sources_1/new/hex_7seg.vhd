@@ -61,7 +61,7 @@ begin
   p_7seg_decoder : process (blank, hex) is
 
   begin
-
+    
     if (blank = '1') then
       seg <= "1111111";     -- Blanking display
     else
