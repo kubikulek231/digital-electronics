@@ -73,6 +73,17 @@ LED(3 downto 0) <= SW;
 
 -- Turn LED(4) on if input value is equal to 0, ie "0000"
 -- LED(4) <= `0` when WRITE YOUR CODE HERE
+process_label : process(SW)
+begin
+   LED(0) <= SW(0);         -- LED 6
+   if (SW = "0000") then    -- LED 4
+        LED(4) <= '1';
+   elsif (SW > "1001") then -- LED 5
+        LED(5) <= '1';
+   elsif (SW = "0001") then -- LED 7
+        LED(5) <= '1';
+   end if;
+end process process_label;
 
 -- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
 -- LED(5) <= WRITE YOUR CODE HERE
