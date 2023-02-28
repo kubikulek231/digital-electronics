@@ -1,4 +1,4 @@
-##Homework
+## Homework
 2. Complete the decoder truth table for **common anode** 7-segment display.
 
    | **Symbol** | **Inputs** | **a** | **b** | **c** | **d** | **e** | **f** | **g** |
