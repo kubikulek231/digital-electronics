@@ -23,10 +23,11 @@
    | E | 1110 | 0 | 1 | 0 | 0 |
    | F | 1111 | 0 | 1 | 1 | 0 |
 
-2. Listing of *LEDs(7:0)* of VHDL hex_led entity architecture `led.vhd`.
+2. Listing of **LEDs(7:0)** of VHDL 'hex_led' entity architecture `led.vhd`.
 
->Decided to use a new entity hex_led so I can just testbench it easilly! 
->Had no idea how to otherwise testbench the LED output we created in the lab.
+>Decided to use a new entity 'hex_led' so I can just testbench it easily! 
+>Otherwise I had no idea how to testbench the LED output we made in the lab.
+>*Disclaimer: the entity actually works with all the LED indicators! (eg. LEDs(7:0))*
 >
 >Entire working VHDL code is available on my [EDA Playground](https://www.edaplayground.com/x/V4Ua).
 
