@@ -6,47 +6,72 @@
 
    | **Hex** | **Inputs** | **LED4** | **LED5** | **LED6** | **LED7** |
    | :-: | :-: | :-: | :-: | :-: | :-: |
-   | 0 | 0000 |  |  |  |  |
-   | 1 | 0001 |  |  |  |  |
-   | 2 |      |  |  |  |  |
-   | 3 |      |  |  |  |  |
-   | 4 |      |  |  |  |  |
-   | 5 |      |  |  |  |  |
-   | 6 |      |  |  |  |  |
-   | 7 |      |  |  |  |  |
-   | 8 | 1000 |  |  |  |  |
-   | 9 |      |  |  |  |  |
-   | A |      |  |  |  |  |
-   | b |      |  |  |  |  |
-   | C |      |  |  |  |  |
-   | d |      |  |  |  |  |
-   | E | 1110 |  |  |  |  |
-   | F | 1111 |  |  |  |  |
+   | 0 | 0000 | 1 | 0 | 0 | 0 |
+   | 1 | 0001 | 0 | 0 | 1 | 1 |
+   | 2 | 0010 | 0 | 0 | 0 | 1 |
+   | 3 | 0011 | 0 | 0 | 1 | 0 |
+   | 4 | 0100 | 0 | 0 | 0 | 1 |
+   | 5 | 0101 | 0 | 0 | 1 | 0 |
+   | 6 | 0110 | 0 | 0 | 0 | 0 |
+   | 7 | 0111 | 0 | 0 | 1 | 0 |
+   | 8 | 1000 | 0 | 0 | 0 | 1 |
+   | 9 | 1001 | 0 | 0 | 1 | 0 |
+   | A | 1010 | 0 | 1 | 0 | 0 |
+   | b | 1011 | 0 | 1 | 1 | 0 |
+   | C | 1100 | 0 | 1 | 0 | 0 |
+   | d | 1101 | 0 | 1 | 1 | 0 |
+   | E | 1110 | 0 | 1 | 0 | 0 |
+   | F | 1111 | 0 | 1 | 1 | 0 |
 
-2. Listing of LEDs(7:4) part of VHDL architecture from source file `top.vhd`. Try to write logic functions as simple as possible. Always use syntax highlighting, meaningful comments, and follow VHDL guidelines:
+2. Listing of *LEDs(7:0)* of VHDL hex_led entity architecture `led.vhd`.
+*Decided to use a new entity hex_led so I can just testbench it easilly!*
+*Had no idea how to otherwise testbench the LED output we created in the lab.*
+Entire working VHDL code is available on [EDA Playground website](https://www.edaplayground.com/x/V4Ua).
 
    ```vhdl
-   --------------------------------------------------------------------
-   -- Experiments on your own: LED(7:4) indicators
-
-   -- Turn LED(4) on if input value is equal to 0, ie "0000"
-   -- LED(4) <= WRITE YOUR CODE HERE
-
-   -- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
-   -- LED(5) <= WRITE YOUR CODE HERE
-
-   -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
-   -- LED(6) <= WRITE YOUR CODE HERE
-
-   -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
-   -- LED(7) <= WRITE YOUR CODE HERE
+  -- process driving all the LED indicators
+  led_turn : process (hex) is
+  begin
+  
+   -- first 4 LEDs are drived directly by the HEX bus
+   led_o(3 downto 0) <= hex(3 downto 0);
+   
+   -- LED 4 turns on when input equals "0000"
+   if (hex = "0000") then
+        led_o(4) <= '1';
+        else
+        led_o(4) <= '0';
+   end if;
+   
+   -- LED 5 turns on when input greater than "1001"
+   if (hex > "1001") then
+        led_o(5) <= '1';
+        else
+        led_o(5) <= '0';
+   end if;
+   
+   -- LED 6 turns on when odd input
+   led_o(6) <= hex(0);
+   
+   -- LED 7 turns on when input is a power of two
+   case hex is
+        when "0001" =>
+           led_o(7) <= '1';
+        when "0010" =>
+           led_o(7) <= '1';
+        when "0100" =>
+           led_o(7) <= '1';
+        when "1000" =>
+           led_o(7) <= '1';
+        when others =>
+           led_o(7) <= '0';
+   		end case;
+        
+  end process led_turn;
    ```
-
 3. Screenshot with simulated time waveforms for LED(7:4). Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
-   ![your figure]()
-
-
+   ![figure](/images/figure.png)
 
 
 ## Homework
