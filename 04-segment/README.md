@@ -27,7 +27,7 @@
 
 >Decided to use a new entity 'hex_led' so I can just testbench it easily! 
 >Otherwise I had no idea how to testbench the LED output we made in the lab.
->*Disclaimer: the entity actually works with all the LED indicators! (eg. LEDs(7:0))*
+>\n*Disclaimer: the entity actually works with all the LED indicators! i.e. LEDs(7:0)*
 >
 >Entire working VHDL code is available on my [EDA Playground](https://www.edaplayground.com/x/V4Ua).
 
