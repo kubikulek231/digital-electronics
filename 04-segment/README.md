@@ -25,10 +25,10 @@
 
 2. Listing of **LEDs(7:0)** of VHDL 'hex_led' entity architecture `led.vhd`.
 
->Decided to use a new entity 'hex_led' so I can just testbench it easily! 
->Otherwise I had no idea how to testbench the LED output we made in the lab.
+>*Decided to create a new entity 'hex_led' and thus testbench the LED indicators as we did in labs before.*
+>*Because frankly I had no idea how to simulate them using the original code we created in the lab.*
 >
->Entire working VHDL code is available on my [EDA Playground](https://www.edaplayground.com/x/V4Ua).
+>*Entire working VHDL code is available on my [EDA Playground](https://www.edaplayground.com/x/V4Ua).*
 
 
   ```vhdl
