@@ -28,7 +28,8 @@
 *Had no idea how to otherwise testbench the LED output we created in the lab.*
 Entire working VHDL code is available on [EDA Playground website](https://www.edaplayground.com/x/V4Ua).
 
-   ```vhdl
+
+  ```vhdl
   -- process driving all the LED indicators
   led_turn : process (hex) is
   begin
@@ -68,7 +69,7 @@ Entire working VHDL code is available on [EDA Playground website](https://www.ed
    		end case;
         
   end process led_turn;
-   ```
+  ```
 3. Screenshot with simulated time waveforms for LED(7:4). Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![figure](/images/figure.png)
