@@ -77,7 +77,7 @@
    ![figure](images/figure.png)
 
 
-> *Disclaimer: the led_o signal covers all the working LED indicators and so does the 'hex_led' entity i.e. LEDs(7:0)*
+> *Disclaimer: the led_o signal covers all the working LED indicators and so does the 'hex_led' entity i.e. LED(7:0)*
 >
 
 ## Homework
