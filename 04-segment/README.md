@@ -73,12 +73,17 @@
         
   end process led_turn;
   ```
+  
+> *Disclaimer: the 'hex_led' entity covers all the LED indicators i.e. LED(7:0)*
+>
+
+
 3. Screenshot with simulated time waveforms for **LED(7:0)**. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![figure](images/figure.png)
 
 
-> *Disclaimer: the led_o signal covers all the working LED indicators and so does the 'hex_led' entity i.e. LED(7:0)*
+> *Disclaimer: the 'led_o' signal covers all the working LED indicators i.e. LED(7:0)*
 >
 
 ## Homework
