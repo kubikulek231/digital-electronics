@@ -27,7 +27,6 @@
 
 >Decided to use a new entity 'hex_led' so I can just testbench it easily! 
 >Otherwise I had no idea how to testbench the LED output we made in the lab.
->\n*Disclaimer: the entity actually works with all the LED indicators! i.e. LEDs(7:0)*
 >
 >Entire working VHDL code is available on my [EDA Playground](https://www.edaplayground.com/x/V4Ua).
 
@@ -73,10 +72,13 @@
         
   end process led_turn;
   ```
-3. Screenshot with simulated time waveforms for LED(7:4). Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
+3. Screenshot with simulated time waveforms for **LED(7:0)**. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![figure](images/figure.png)
 
+
+> *Disclaimer: the led_o signal covers all the working LED indicators and so does the 'hex_led' entity i.e. LEDs(7:0)*
+>
 
 ## Homework
 Complete the decoder truth table for **common anode** 7-segment display.
