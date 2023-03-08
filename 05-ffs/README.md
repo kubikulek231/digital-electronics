@@ -36,11 +36,11 @@ begin
     q_bar <= not sig_q;
 end architecture Behavioral;
 ```
-2. Screenshot with simulated time waveforms of JK flip-flop.
+2. Screenshot with simulated time waveforms of JK flip-flop.*
 
    ![fig_JK.png](images/fig_JK.png)
    
-   >*not part of assignment*   
+   >*not part of assignment**  
 
 ### Shift register
 
@@ -48,11 +48,11 @@ end architecture Behavioral;
 
    ![schematic_4bit_shift_reg.png](images/schematic_4bit_shift_reg.png)
    
-2 Screenshot with simulated time waveforms of 4-bit shift register.
+2. Screenshot with simulated time waveforms of 4-bit shift register.*
 
    ![fig_4bit_shift_reg.png](images/fig_4bit_shift_reg.png)
       
-   >*not part of assignment*   
+   >*not part of assignment**   
   
    
 ### Pre-Lab preparation
