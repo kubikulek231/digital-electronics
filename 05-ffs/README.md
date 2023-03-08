@@ -39,6 +39,8 @@ end architecture Behavioral;
 2. Screenshot with simulated time waveforms of JK flip-flop.
 
    ![fig_JK.png](images/fig_JK.png)
+   
+   >*not part of assignment*   
 
 ### Shift register
 
@@ -49,10 +51,12 @@ end architecture Behavioral;
 2 Screenshot with simulated time waveforms of 4-bit shift register.
 
    ![fig_4bit_shift_reg.png](images/fig_4bit_shift_reg.png)
+      
+   >*not part of assignment*   
+  
    
 ### Pre-Lab preparation
-1.  Write characteristic equations and complete truth tables for D, JK, T flip-flops where q(n) represents main output value before the clock edge and q(n+1) represents output value after the clock edge.
-
+1.  Write characteristic equations and complete truth tables for D, JK, T flip-flops where q(n) represents main output value before the clock edge and q(n+1) represents output value after the clock edge.               
 
 
    **D-type FF**
