@@ -40,7 +40,7 @@ end architecture Behavioral;
 
    ![fig_JK.png](images/fig_JK.png)
    
-   >*not part of the assignment**  
+   >*not a part of the assignment**  
 
 ### Shift register
 
@@ -52,7 +52,7 @@ end architecture Behavioral;
 
    ![fig_4bit_shift_reg.png](images/fig_4bit_shift_reg.png)
       
-   >*not part of the assignment**   
+   >*not a part of the assignment**   
   
    
 ### Pre-Lab preparation
