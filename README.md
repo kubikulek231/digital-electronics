@@ -11,6 +11,7 @@ Derived from *[here](https://github.com/tomas-fryza/digital-electronics-1.git)*.
   <li>02-logic</li>
   <li>03-vivado</li>
   <li>04-segment</li>
+  <li>05-ffs</li>
 </ol>
 
 MD syntax guide *[here](https://www.markdownguide.org/basic-syntax/)*.
