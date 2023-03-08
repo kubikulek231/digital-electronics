@@ -1,24 +1,14 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity tb_top is
---  Port ( );
 end tb_top;
 
 architecture testbench of tb_top is
 
     constant c_CLK_100MHZ_PERIOD : time := 10 ns;
 
-    --Local signals
+    -- local signals
     signal sig_clk_100MHz : std_logic;
     signal sig_rst        : std_logic;
     signal sig_data       : std_logic;
@@ -26,7 +16,7 @@ architecture testbench of tb_top is
 
 
 begin
-    -- Connecting testbench signals with d_ff_rst entity
+    -- connecting testbench signals with top entity
     -- (Unit Under Test)
     uut_top : entity work.top
         port map (
@@ -36,45 +26,36 @@ begin
             LED         => sig_led
         );
 
-    --------------------------------------------------------
-    -- Clock generation process
-    --------------------------------------------------------
+    -- clock generation process
     p_clk_gen : process
     begin
-        while now < 300 ns loop -- 30 periods of 100MHz clock
+        while now < 150 ns loop
             sig_clk_100MHz <= '0';
             wait for c_CLK_100MHZ_PERIOD / 2;
             sig_clk_100MHz <= '1';
             wait for c_CLK_100MHZ_PERIOD / 2;
         end loop;
-        wait;                -- Process is suspended forever
+        wait;                
     end process p_clk_gen;
 
-    --------------------------------------------------------
-    -- Reset generation process
-    --------------------------------------------------------
+    -- reset generation process
     p_reset_gen : process
     begin
         sig_rst <= '0';
-        wait for 150 ns;
-        sig_rst <= '0';
-        wait for 150 ns;
+        wait for 130 ns;
+        sig_rst <= '1';
+        wait for 20 ns;
         wait;
     end process p_reset_gen;
 
-    --------------------------------------------------------
-    -- Data generation process
-    --------------------------------------------------------
+    -- data generation process
     p_stimulus : process
     begin
         report "Stimulus process started";
-        sig_data <= '1'; wait for 61 ns;
-        sig_data <= '0'; wait for 80 ns;
-        sig_data <= '1'; wait for 46 ns;
-        sig_data <= '0'; wait for 55 ns;
-        sig_data <= '1'; wait for 58 ns;
-
-        -- DEFINE YOUR INPUT DATA HERE
+        sig_data <= '1'; wait for 30 ns;
+        sig_data <= '0'; wait for 40 ns;
+        sig_data <= '1'; wait for 30 ns;
+        sig_data <= '0'; wait for 50 ns;
 
         report "Stimulus process finished";
         wait;
