@@ -4,6 +4,7 @@
 
 1. Complete the truth table for LEDs(7:4) according to comments in source code.
 
+
    | **Hex** | **Inputs** | **LED4** | **LED5** | **LED6** | **LED7** |
    | :-: | :-: | :-: | :-: | :-: | :-: |
    | 0 | 0000 | 1 | 0 | 0 | 0 |
