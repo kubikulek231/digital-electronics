@@ -1,17 +1,20 @@
-library ieee;
-  use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
-------------------------------------------------------------
--- Entity declaration for testbench
-------------------------------------------------------------
-entity tb_ff_rst is
-  -- Entity of testbench is always empty
-end entity tb_ff_rst;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
 
-------------------------------------------------------------
--- Architecture body for testbench
-------------------------------------------------------------
-architecture testbench of tb_ff_rst is
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity tb_top is
+--  Port ( );
+end tb_top;
+
+architecture testbench of tb_top is
 
     constant c_CLK_100MHZ_PERIOD : time := 10 ns;
 
@@ -19,31 +22,19 @@ architecture testbench of tb_ff_rst is
     signal sig_clk_100MHz : std_logic;
     signal sig_rst        : std_logic;
     signal sig_data       : std_logic;
-    signal sig_dq         : std_logic;
-    signal sig_dq_bar     : std_logic;
-    -- simulating Toggle Flip-Flop
-    signal sig_tq         : std_logic;
-    signal sig_tq_bar     : std_logic;
+    signal sig_led        : std_logic_vector(3 downto 0);
+
 
 begin
     -- Connecting testbench signals with d_ff_rst entity
     -- (Unit Under Test)
-    uut_d_ff_rst : entity work.d_ff_rst
+    uut_top : entity work.top
         port map (
-            clk   => sig_clk_100MHz,
-            rst   => sig_rst,
-            d     => sig_data,
-            q     => sig_dq,
-            q_bar => sig_dq_bar
+            CLK100MHZ   => sig_clk_100MHz,
+            BTNC        => sig_rst,
+            SW(0)       => sig_data,
+            LED         => sig_led
         );
-    uut_t_ff_rst : entity work.t_ff_rst
-       port map (
-           clk   => sig_clk_100MHz,
-           rst   => sig_rst,
-           t     => sig_data,
-           q     => sig_tq,
-           q_bar => sig_tq_bar
-       );
 
     --------------------------------------------------------
     -- Clock generation process
@@ -66,7 +57,7 @@ begin
     begin
         sig_rst <= '0';
         wait for 150 ns;
-        sig_rst <= '1';
+        sig_rst <= '0';
         wait for 150 ns;
         wait;
     end process p_reset_gen;
