@@ -1,8 +1,8 @@
 # Lab 5: JAKUB LEPÍK
 >*The code is not available on my EDA Playground anymore as I decided to switch to Vivado instead. It has many advantages over EDA PG but sadly the visitor can not furthermore simulate my code without any external programs...*
 >
->The design files are located at [flip_flops/flip_flops.srcs/sources_1/new](https://github.com/kubikulek231/digital-electronics-1/tree/master/05-ffs/flip_flops/flip_flops.srcs/sources_1/new) .
->The testbench files are located at [flip_flops/flip_flops.srcs/sim_1/new](https://github.com/kubikulek231/digital-electronics-1/tree/master/05-ffs/flip_flops/flip_flops.srcs/sim_1/new) .
+>The design files are located at [flip_flops/flip_flops.srcs/sources_1/new](flip_flops/flip_flops.srcs/sources_1/new).
+>The testbench files are located at [flip_flops/flip_flops.srcs/sim_1/new](flip_flops/flip_flops.srcs/sim_1/new).
 ### D & T Flip-flops
 
 1. Screenshot with simulated time waveforms. D and T type flip-flops in single testbench with a maximum duration of 350 ns, including reset. All inputs and outputs shown.
