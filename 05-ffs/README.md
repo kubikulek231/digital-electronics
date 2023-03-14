@@ -1,5 +1,5 @@
 # Lab 5: JAKUB LEPÍK
->*The code is not available on my EDA Playground anymore as I decided to switch to Vivado instead. It has many advantages (imo) over EDA but sadly the visitor can not simulate directly from now...*
+>*The code is not available on my EDA Playground anymore as I decided to switch to Vivado instead. It has many advantages (imo) over EDA but sadly the visitor can not simulate my code directly from now...*
 >
 >*The design files are located at [flip_flops/flip_flops.srcs/sources_1/new](flip_flops/flip_flops.srcs/sources_1/new).*               
 >*The testbench files are located at [flip_flops/flip_flops.srcs/sim_1/new](flip_flops/flip_flops.srcs/sim_1/new).*                   
