@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity top is
     Port ( CLK100MHZ : in STD_LOGIC;
-           SW : in STD_LOGIC;
+           SW : in STD_LOGIC_VECTOR (1 downto 0);
            CA : out STD_LOGIC;
            CB : out STD_LOGIC;
            CC : out STD_LOGIC;
@@ -42,7 +42,9 @@ entity top is
            CF : out STD_LOGIC;
            CG : out STD_LOGIC;
            AN : out STD_LOGIC_VECTOR (7 downto 0);
-           BTNC : in STD_LOGIC);
+           BTNC : in STD_LOGIC;
+           LED : out STD_LOGIC_VECTOR (11 downto 0)
+           );
 end top;
 
 ----------------------------------------------------------
@@ -53,7 +55,9 @@ architecture behavioral of top is
 
   -- 4-bit counter @ 250 ms
   signal sig_en_250ms : std_logic;                    --! Clock enable signal for Counter0
+  signal sig_en_10ms : std_logic;
   signal sig_cnt_4bit : std_logic_vector(3 downto 0); --! Counter0
+  signal sig_cnt_12bit : std_logic_vector(11 downto 0); --! Counter0
 
 begin
 
@@ -69,6 +73,15 @@ begin
           rst => BTNC,
           ce  => sig_en_250ms
       );
+   clk_en1 : entity work.clock_enable
+      generic map (
+          g_MAX => 1000000
+      )
+      port map(
+          clk => CLK100MHZ,
+          rst => BTNC,
+          ce => sig_en_10ms
+      );
 
   --------------------------------------------------------
   -- Instance (copy) of cnt_up_down entity
@@ -81,8 +94,19 @@ begin
               clk    => CLK100MHZ,
               rst    => BTNC,
               en     => sig_en_250ms,
-              cnt_up => SW,
+              cnt_up => SW(0),
               cnt    => sig_cnt_4bit
+      );
+    bin_cnt1 : entity work.cnt_up_down
+     generic map(
+          g_CNT_WIDTH => 12
+      )
+      port map(
+              clk    => CLK100MHZ,
+              rst    => BTNC,
+              en     => sig_en_10ms,
+              cnt_up => SW(1),
+              cnt    => sig_cnt_12bit
       );
 
   --------------------------------------------------------
@@ -106,5 +130,6 @@ begin
   --------------------------------------------------------
   -- Connect one common anode to 3.3V
   AN <= b"1111_1110";
+  LED <= sig_cnt_12bit;
 
 end architecture behavioral;
