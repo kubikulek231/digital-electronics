@@ -50,7 +50,7 @@
 
     ![WaveDrom](images/wavedrom.png)
 >The figure above was created in WaveDrom digital timing diagram online tool. The figure source code is as follows:
-```
+```javascript
 {
   signal:
   [
