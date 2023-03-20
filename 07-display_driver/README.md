@@ -46,7 +46,8 @@
    ![your figure]()
 
 ### Homework
-See schematic or reference manual of the Nexys A7 board, find out the connection of 7-segment displays, and complete the signal timing to display four-digit value 3.142.
+1. See schematic or reference manual of the Nexys A7 board, find out the connection of 7-segment displays, and complete the signal timing to display four-digit value 3.142.
+
     ![WaveDrom](images/wavedrom.png)
 >The figure above was created in WaveDrom digital timing diagram online tool. The figure source code is as follows:
 ```
