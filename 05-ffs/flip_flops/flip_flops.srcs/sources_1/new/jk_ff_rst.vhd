@@ -30,4 +30,4 @@ begin
     -- output ports are permanently connected to local signal
     q     <= sig_q;
     q_bar <= not sig_q;
-end Behavioral;
+end architecture Behavioral;

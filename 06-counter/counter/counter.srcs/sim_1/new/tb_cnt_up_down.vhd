@@ -1,74 +1,140 @@
 ----------------------------------------------------------
 --
---! @title N-bit Up/Down binary counter
---! @author Tomas Fryza
---! Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
---!
---! @copyright (c) 2019 Tomas Fryza
---! This work is licensed under the terms of the MIT license
---!
---! Implementation of bidirectional N-bit counter. Number
---! of bits is set by `g_CNT_WIDTH` and counting direction
---! by `cnt_up` input.
+-- Testbench for N-bit Up/Down binary counter.
+-- Nexys A7-50T, xc7a50ticsg324-1L
+-- TerosHDL, Vivado v2020.2, EDA Playground
 --
--- Hardware: Nexys A7-50T, xc7a50ticsg324-1L
--- Software: TerosHDL, Vivado 2020.2, EDA Playground
+-- Copyright (c) 2020 Tomas Fryza
+-- Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
+-- This work is licensed under the terms of the MIT license.
 --
 ----------------------------------------------------------
 
 library ieee;
   use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
 
-----------------------------------------------------------
--- Entity declaration for N-bit counter
-----------------------------------------------------------
+------------------------------------------------------------
+-- Entity declaration for testbench
+------------------------------------------------------------
 
-entity cnt_up_down is
-  generic (
-    g_CNT_WIDTH : natural := 4 --! Default number of counter bits
-  );
-  port (
-    clk    : in    std_logic; --! Main clock
-    rst    : in    std_logic; --! Synchronous reset
-    en     : in    std_logic; --! Enable input
-    cnt_up : in    std_logic; --! Direction of the counter (1 @ UP, 0 @ DOWN)
-    cnt    : out   std_logic_vector(g_CNT_WIDTH - 1 downto 0) --! Counter value
-  );
-end entity cnt_up_down;
+entity tb_cnt_up_down is
+  -- Entity of testbench is always empty
+end entity tb_cnt_up_down;
 
-----------------------------------------------------------
--- Architecture body for N-bit counter
-----------------------------------------------------------
+------------------------------------------------------------
+-- Architecture body for testbench
+------------------------------------------------------------
 
-architecture behavioral of cnt_up_down is
+architecture testbench of tb_cnt_up_down is
 
-  signal sig_cnt : unsigned(g_CNT_WIDTH - 1 downto 0) := (others => '0'); --! Local counter
+  -- Number of bits for testbench counter
+  constant c_CNT_WIDTH         : natural := 3;
+  constant c_CLK_100MHZ_PERIOD : time    := 10 ns;
+
+  -- Local signals
+  signal sig_clk_100mhz : std_logic;
+  signal sig_rst        : std_logic;
+  signal sig_en         : std_logic;
+  signal sig_cnt_up     : std_logic;
+  signal sig_cnt        : std_logic_vector(c_CNT_WIDTH - 1 downto 0) := (others => '0');
 
 begin
 
+  -- Connecting testbench signals with cnt_up_down entity
+  -- (Unit Under Test)
+  uut_cnt : entity work.cnt_up_down
+    generic map (
+      g_CNT_WIDTH => c_CNT_WIDTH
+    )
+    port map (
+      clk    => sig_clk_100mhz,
+      rst    => sig_rst,
+      en     => sig_en,
+      cnt_up => sig_cnt_up,
+      cnt    => sig_cnt
+    );
+
   --------------------------------------------------------
-  -- p_cnt_up_down:
-  -- Clocked process with synchronous reset which implements
-  -- n-bit up/down counter.
+  -- Clock generation process
   --------------------------------------------------------
-  p_cnt_up_down : process (clk) is
+  p_clk_gen : process is
   begin
 
-    if rising_edge(clk) then
-      if (rst = '1') then           -- Synchronous reset
-        sig_cnt <= (others => '0'); -- Clear all bits
-      elsif (en = '1') then         -- Test if counter is enabled
+    while now < 800 ns loop             -- 75 periods of 100MHz clock
 
-        -- TEST COUNTER DIRECTION HERE
+      sig_clk_100mhz <= '0';
+      wait for c_CLK_100MHZ_PERIOD / 2;
+      sig_clk_100mhz <= '1';
+      wait for c_CLK_100MHZ_PERIOD / 2;
 
-          sig_cnt <= sig_cnt + 1;
-      end if;
-    end if;
+    end loop;
+    wait;                               -- Process is suspended forever
 
-  end process p_cnt_up_down;
+  end process p_clk_gen;
 
-  -- Output must be retyped from "unsigned" to "std_logic_vector"
-  cnt <= std_logic_vector(sig_cnt);
+  --------------------------------------------------------
+  -- Reset generation process
+  --------------------------------------------------------
+  p_reset_gen : process is
+  begin
 
-end architecture behavioral;
+    sig_rst <= '0';
+    wait for 30 ns;
+    sig_rst <= '1';
+    wait for 70 ns;
+    sig_rst <= '0';
+    wait for 230 ns;
+    sig_rst <= '1';
+    wait for 70 ns;
+    sig_rst <= '0';
+    wait for 300 ns;
+    
+    sig_rst <= '1';
+
+    wait;
+
+  end process p_reset_gen;
+
+  --------------------------------------------------------
+  -- enable generation process
+  --------------------------------------------------------
+  p_en_gen : process is
+  begin
+
+    -- Enable counting
+    sig_en <= '1';
+    wait for 500 ns;
+    sig_en <= '0';
+    wait for 60 ns;
+    sig_en <= '1';
+
+  end process p_en_gen;
+  --------------------------------------------------------
+  -- direction generation process
+  --------------------------------------------------------
+  p_cnt_up : process is
+  begin
+
+    -- Change counter direction
+    sig_cnt_up <= '1';
+    wait for 300 ns;
+    sig_cnt_up <= '0';
+    wait for 200 ns;
+    sig_cnt_up <= '1';
+
+  end process p_cnt_up;
+  
+  --------------------------------------------------------
+  -- Data generation process
+  --------------------------------------------------------
+  p_stimulus : process is
+  begin
+
+    report "Stimulus process started";
+
+    report "Stimulus process finished";
+    wait;
+
+  end process p_stimulus;
+
+end architecture testbench;
