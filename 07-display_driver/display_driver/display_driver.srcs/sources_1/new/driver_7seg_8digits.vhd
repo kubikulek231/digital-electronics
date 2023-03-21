@@ -44,7 +44,7 @@ library ieee;
 --
 ----------------------------------------------------------
 
-entity driver_7seg_4digits is
+entity driver_7seg_8digits is
   port (
     clk     : in    std_logic;
     rst     : in    std_logic;
@@ -61,19 +61,19 @@ entity driver_7seg_4digits is
     seg     : out   std_logic_vector(6 downto 0);
     dig     : out   std_logic_vector(7 downto 0)
   );
-end entity driver_7seg_4digits;
+end entity driver_7seg_8digits;
 
 ----------------------------------------------------------
 -- Architecture declaration for display driver
 ----------------------------------------------------------
 
-architecture behavioral of driver_7seg_4digits is
+architecture behavioral of driver_7seg_8digits is
 
   -- Internal clock enable
   signal sig_en_2ms : std_logic;
 
   -- Internal 3-bit counter for multiplexing 8 digits
-  signal sig_cnt_3bit : std_logic_vector(3 downto 0);
+  signal sig_cnt_3bit : std_logic_vector(2 downto 0);
 
   -- Internal 4-bit value for 7-segment decoder
   signal sig_hex : std_logic_vector(3 downto 0);
@@ -104,7 +104,7 @@ begin
   --------------------------------------------------------
   bin_cnt0 : entity work.cnt_up_down
     generic map (
-      g_CNT_WIDTH => 4
+      g_CNT_WIDTH => 3
     )
     port map (
       en => sig_en_2ms,
