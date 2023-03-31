@@ -129,26 +129,16 @@ p_traffic_fsm : process (clk) is
     end if; -- Rising edge
   end process p_traffic_fsm;
 ```
-> *The process is a bit more advanced, there's the classic yellow light translition in between of both stop -> start and start -> stop signals, there's also a is_car signal which deals with the traffic when there are cars in one direction only (green stays on during that time).*
+> *The process is a bit more advanced, there's the classic yellow light translition in between of both stop -> start and start -> stop signals, there's also a sig_iscar signal which deals with the traffic when there are cars in one direction only (green stays on during that time). On the top of that there's also the sig_speed signal, which speeds up the process of turning the WEST direction traffic light to GREEN.*
 
 
 2. Screenshot with simulated time waveforms. The full functionality of the entity must be verified. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![waveform](images/waveform.png)
    
-> *For simpler simulation only the case where there are cars in both direction is considered.*
+> *Including sig_iscar, sig_speed signals*
 
 
 3. Figure of Moor-based state diagram of the traffic light controller with *speed button* to ensure a synchronous transition to the `WEST_GO` state. The image can be drawn on a computer or by hand. Always name all states, transitions, and input signals!
 
    ![your figure]()
-
-### Homework
-1. See [schematic](https://github.com/tomas-fryza/digital-electronics-1/blob/master/docs/nexys-a7-sch.pdf) or [reference manual](https://reference.digilentinc.com/reference/programmable-logic/nexys-a7/reference-manual) of the Nexys A7 board and find out the connection of two RGB LEDs, ie to which FPGA pins are connected and how. How you can control them to get red, yellow, or green colors? Draw the schematic with RGB LEDs.
-
-   | **RGB LED** | **Artix-7 pin names** | **Red** | **Yellow** | **Green** |
-   | :-: | :-: | :-: | :-: | :-: |
-   | LD16 | N15, M16, R12 | `1,0,0` | `1,1,0` | `0,1,0` |
-   | LD17 |  |  |  |  |
-
-2. See [schematic](https://github.com/tomas-fryza/digital-electronics-1/blob/master/docs/nexys-a7-sch.pdf) or [reference manual](https://reference.digilentinc.com/reference/programmable-logic/nexys-a7/reference-manual) of the Nexys A7 board and find out to which FPGA pins Pmod ports JA, JB, JC, and JD are connected.

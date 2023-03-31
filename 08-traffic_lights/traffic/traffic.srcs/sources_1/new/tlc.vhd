@@ -210,7 +210,7 @@ begin
           when SOUTH_GO =>
             -- Speed up to WEST GO when button is pressed
             if (sig_speed = '1') then
-              sig_state <= SOUTH_WAIT_STOP;
+              sig_state <= WEST_WAIT_GO;
               sig_cnt <= c_ZERO;
             -- Skip everything else
             -- Count to 4 secs  
@@ -229,8 +229,13 @@ begin
             end if;
             
           when SOUTH_WAIT_STOP =>
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= WEST_WAIT_GO;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
             -- Count to 1 secs  
-            if (sig_cnt < c_DELAY_1SEC) then
+            elsif (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
