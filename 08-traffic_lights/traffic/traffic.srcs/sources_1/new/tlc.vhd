@@ -46,21 +46,23 @@ architecture behavioral of tlc is
 
   -- Define the FSM states
   type t_state is (
+    WEST_WAIT_GO,
+    WEST_WAIT_STOP,
     WEST_STOP,
     WEST_GO,
-    WEST_WAIT,
+    SOUTH_WAIT_GO,
+    SOUTH_WAIT_STOP,
     SOUTH_STOP,
-    SOUTH_GO,
-    SOUTH_WAIT
+    SOUTH_GO
   );
   -- Define the signal that uses different states
   signal sig_state : t_state;
 
   -- Internal clock enable
-  signal sig_en : std_logic;
+  signal sig_en : std_logic := '1';
 
   -- Local delay counter
-  signal sig_cnt : unsigned(4 downto 0);
+  signal sig_cnt : unsigned(4 downto 0) := b"00000";
 
   -- Specific values for local counter
   constant c_DELAY_4SEC : unsigned(4 downto 0) := b"1_0000"; --! 4-second delay
@@ -85,7 +87,7 @@ begin
       -- FOR IMPLEMENTATION, CALCULATE VALUE: 250 ms / (1/100 MHz)
       -- 1   @ 10 ns
       -- ??? @ 250 ms
-      g_MAX => 25000000
+      g_MAX => 1
     )
     port map (
       clk => clk,
@@ -113,8 +115,19 @@ begin
         case sig_state is
 
           when WEST_STOP =>
-            -- Count to 2 secs
+            -- Count to 4 secs
             if (sig_cnt < c_DELAY_2SEC) then
+              sig_cnt <= sig_cnt + 1;
+            else
+              -- Move to the next state
+              sig_state <= WEST_WAIT_GO;
+              -- Reset local counter value
+              sig_cnt <= c_ZERO;
+            end if;
+            
+          when WEST_WAIT_GO =>
+            -- Count to 1 secs
+            if (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
@@ -130,16 +143,16 @@ begin
             else
               -- Move to the next state
               if (sig_iscar = "10") then
-              sig_state <= WEST_GO;
+                sig_state <= WEST_GO;
               else
-              sig_state <= WEST_WAIT;
+                sig_state <= WEST_WAIT_STOP;
               end if;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
           
-          when WEST_WAIT =>
-            -- Count to 4 secs
+          when WEST_WAIT_STOP =>
+            -- Count to 1 secs
             if (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
@@ -155,6 +168,17 @@ begin
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
+              sig_state <= SOUTH_WAIT_GO;
+              -- Reset local counter value
+              sig_cnt <= c_ZERO;
+            end if;
+          
+          when SOUTH_WAIT_GO =>
+            -- Count to 1 secs
+            if (sig_cnt < c_DELAY_1SEC) then
+              sig_cnt <= sig_cnt + 1;
+            else
+              -- Move to the next state
               sig_state <= SOUTH_GO;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
@@ -166,23 +190,23 @@ begin
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              sig_state <= SOUTH_WAIT;
+              sig_state <= SOUTH_WAIT_GO;
               if (sig_iscar = "01") then
               sig_state <= SOUTH_GO;
               else
-              sig_state <= SOUTH_WAIT;
+              sig_state <= SOUTH_WAIT_STOP;
               end if;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
             
-          when SOUTH_WAIT =>
-            -- Count to 4 secs
+          when SOUTH_WAIT_STOP =>
+            -- Count to 1 secs
             if (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              sig_state <= WEST_STOP;
+              sig_state <= WEST_WAIT_GO;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
@@ -221,7 +245,11 @@ begin
         south  <= c_RED;
         west   <= c_GREEN;
         
-      when WEST_WAIT =>
+      when WEST_WAIT_GO =>
+        south  <= c_RED;
+        west   <= c_YELLOW;
+       
+      when WEST_WAIT_STOP =>
         south  <= c_RED;
         west   <= c_YELLOW;
       
@@ -233,10 +261,14 @@ begin
         south  <= c_GREEN;
         west   <= c_RED;
         
-      when SOUTH_WAIT =>
+      when SOUTH_WAIT_GO =>
         south  <= c_YELLOW;
         west   <= c_RED;
-
+      
+      when SOUTH_WAIT_STOP =>
+        south  <= c_YELLOW;
+        west   <= c_RED;
+        
       when others =>
         south <= c_RED;
         west  <= c_RED;

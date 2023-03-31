@@ -17,15 +17,15 @@ library ieee;
 -- Entity declaration for testbench
 ----------------------------------------------------------
 
-entity tb_tlc is
+entity tb_top is
   -- Entity of testbench is always empty
-end entity tb_tlc;
+end entity tb_top;
 
 ----------------------------------------------------------
 -- Architecture body for testbench
 ----------------------------------------------------------
 
-architecture testbench of tb_tlc is
+architecture testbench of tb_top is
 
   -- Local constants
   constant c_CLK_100MHZ_PERIOD : time := 10 ns;
@@ -36,17 +36,17 @@ architecture testbench of tb_tlc is
   signal sig_south      : std_logic_vector(2 downto 0);
   signal sig_west       : std_logic_vector(2 downto 0);
   signal sig_iscar      : std_logic_vector(1 downto 0);
-
+  
 begin
 
   -- Connecting testbench signals with tlc entity
   -- (Unit Under Test)
   uut_tlc : entity work.tlc
     port map (
-      clk        => sig_clk_100mhz,
-      rst        => sig_rst,
-      south      => sig_south,
-      west       => sig_west,
+      clk   => sig_clk_100mhz,
+      rst   => sig_rst,
+      south => sig_south,
+      west  => sig_west,
       sig_iscar  => sig_iscar
     );
 
@@ -87,11 +87,11 @@ begin
   begin
 
     sig_rst <= '0';
-    wait for 100 ns;
+    wait for 300 ns;
 
     -- Reset activated
     sig_rst <= '1';
-    wait for 0 ns;
+    wait for 100 ns;
 
     -- Reset deactivated
     sig_rst <= '0';
