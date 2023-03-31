@@ -129,12 +129,15 @@ p_traffic_fsm : process (clk) is
     end if; -- Rising edge
   end process p_traffic_fsm;
 ```
-> *The process is a bit more advanced, there's the classic yellow light translition in between of both stop -> start and start -> stop signals, there's also a is_car signal which deals with the traffic when there are cars in one direction only (green does not go off during that situation).*
+> *The process is a bit more advanced, there's the classic yellow light translition in between of both stop -> start and start -> stop signals, there's also a is_car signal which deals with the traffic when there are cars in one direction only (green stays on during that time).*
 
 
 2. Screenshot with simulated time waveforms. The full functionality of the entity must be verified. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![waveform](images/waveform.png)
+   
+> *For simpler simulation the case where there are cars in both direction only is considered.*
+
 
 3. Figure of Moor-based state diagram of the traffic light controller with *speed button* to ensure a synchronous transition to the `WEST_GO` state. The image can be drawn on a computer or by hand. Always name all states, transitions, and input signals!
 
