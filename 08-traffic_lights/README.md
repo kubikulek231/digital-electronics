@@ -129,7 +129,7 @@ p_traffic_fsm : process (clk) is
     end if; -- Rising edge
   end process p_traffic_fsm;
 ```
-> *The process is a bit more advanced, there's the classic YELLOW translition in between of both STOP -> GO and START -> GO states and also a sig_iscar signal which deals with the traffic when there are cars in one direction only (green stays on during that time). On the top of that you can find sig_speed signal there, which speeds up the process (safely) of turning the WEST direction traffic light from almost ANY state to GO.*
+> *The process is a bit more advanced, there's the classic YELLOW translition in between of both STOP -> GO and GO -> STOP states and also a sig_iscar signal which deals with the traffic when there are cars in one direction only (green stays on during that time). On the top of that you can find sig_speed signal there, which speeds up the process (safely) of turning the WEST direction traffic light from almost ANY state to GO.*
 
 
 2. Screenshot with simulated time waveforms. The full functionality of the entity must be verified. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
