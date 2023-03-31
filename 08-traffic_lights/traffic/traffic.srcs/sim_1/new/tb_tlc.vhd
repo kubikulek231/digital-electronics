@@ -36,6 +36,7 @@ architecture testbench of tb_tlc is
   signal sig_south      : std_logic_vector(2 downto 0);
   signal sig_west       : std_logic_vector(2 downto 0);
   signal sig_iscar      : std_logic_vector(1 downto 0);
+  signal sig_speed      : std_logic;
 
 begin
 
@@ -47,8 +48,25 @@ begin
       rst        => sig_rst,
       south      => sig_south,
       west       => sig_west,
-      sig_iscar  => sig_iscar
+      sig_iscar  => sig_iscar,
+      sig_speed  => sig_speed
     );
+
+
+  --------------------------------------------------------
+  -- sig_speed generation process
+  --------------------------------------------------------
+  p_speed_gen : process is
+  begin
+    
+    sig_speed <= '0';
+    wait for 500 ns;
+    sig_speed <= '1';
+    wait for 50 ns;
+    sig_speed <= '0';
+    wait;
+
+  end process p_speed_gen;
 
   --------------------------------------------------------
   -- Clock generation process
@@ -75,6 +93,10 @@ begin
   p_iscar_gen : process is
   begin
 
+    sig_iscar <= "11";
+    wait for 1000 ns;
+    sig_iscar <= "01";
+    wait for 500 ns;
     sig_iscar <= "11";
     wait;
 

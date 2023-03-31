@@ -36,6 +36,7 @@ architecture testbench of tb_top is
   signal sig_south      : std_logic_vector(2 downto 0);
   signal sig_west       : std_logic_vector(2 downto 0);
   signal sig_iscar      : std_logic_vector(1 downto 0);
+  signal sig_speed      : std_logic;
   
 begin
 
@@ -47,7 +48,8 @@ begin
       rst   => sig_rst,
       south => sig_south,
       west  => sig_west,
-      sig_iscar  => sig_iscar
+      sig_iscar  => sig_iscar,
+      sig_speed  => sig_speed
     );
 
   --------------------------------------------------------
@@ -68,6 +70,21 @@ begin
     wait;
 
   end process p_clk_gen;
+  
+  --------------------------------------------------------
+  -- sig_speed generation process
+  --------------------------------------------------------
+  p_speed_gen : process is
+  begin
+    
+    sig_speed <= '0';
+    wait for 500 ns;
+    sig_speed <= '1';
+    wait for 50 ns;
+    sig_speed <= '0';
+    wait;
+
+  end process p_speed_gen;
   
   --------------------------------------------------------
   -- sig_iscar generation process

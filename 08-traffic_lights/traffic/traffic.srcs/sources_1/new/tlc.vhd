@@ -30,11 +30,12 @@ library ieee;
 
 entity tlc is
   port (
+    sig_speed : in std_logic;
     sig_iscar : in std_logic_vector(1 downto 0);
-    clk   : in    std_logic;                    --! Main clock
-    rst   : in    std_logic;                    --! High-active synchronous reset
-    south : out   std_logic_vector(2 downto 0); --! Traffic light for "south" direction
-    west  : out   std_logic_vector(2 downto 0)  --! Traffic light for "west" direction
+    clk       : in    std_logic;                    --! Main clock
+    rst       : in    std_logic;                    --! High-active synchronous reset
+    south     : out   std_logic_vector(2 downto 0); --! Traffic light for "south" direction
+    west      : out   std_logic_vector(2 downto 0)  --! Traffic light for "west" direction
   );
 end entity tlc;
 
@@ -56,13 +57,13 @@ architecture behavioral of tlc is
     SOUTH_GO
   );
   -- Define the signal that uses different states
-  signal sig_state : t_state;
+  signal sig_state      : t_state;
 
   -- Internal clock enable
-  signal sig_en : std_logic := '1';
+  signal sig_en         : std_logic := '1';
 
   -- Local delay counter
-  signal sig_cnt : unsigned(4 downto 0) := b"00000";
+  signal sig_cnt        : unsigned(4 downto 0) := b"00000";
 
   -- Specific values for local counter
   constant c_DELAY_4SEC : unsigned(4 downto 0) := b"1_0000"; --! 4-second delay
@@ -71,9 +72,9 @@ architecture behavioral of tlc is
   constant c_ZERO       : unsigned(4 downto 0) := b"0_0000"; --! Just zero
 
   -- Output traffic lights' values
-  constant c_RED    : std_logic_vector(2 downto 0) := b"100"; --! RGB settings for red color
-  constant c_YELLOW : std_logic_vector(2 downto 0) := b"110"; --! RGB settings for yellow color
-  constant c_GREEN  : std_logic_vector(2 downto 0) := b"010"; --! RGB settings for green color
+  constant c_RED        : std_logic_vector(2 downto 0) := b"100"; --! RGB settings for red color
+  constant c_YELLOW     : std_logic_vector(2 downto 0) := b"110"; --! RGB settings for yellow color
+  constant c_GREEN      : std_logic_vector(2 downto 0) := b"010"; --! RGB settings for green color
 
 begin
 
@@ -115,8 +116,13 @@ begin
         case sig_state is
 
           when WEST_STOP =>
-            -- Count to 4 secs
-            if (sig_cnt < c_DELAY_2SEC) then
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= WEST_WAIT_GO;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
+            -- Count to 2 secs
+            elsif (sig_cnt < c_DELAY_2SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
@@ -137,12 +143,14 @@ begin
             end if;
 
           when WEST_GO =>
-            -- Count to 4 secs
+             -- Count to 4 secs
             if (sig_cnt < c_DELAY_4SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              if (sig_iscar = "10") then
+              -- Don't move if there are no cars in the other direction
+              -- Or when the Speed button is pressed
+              if (sig_iscar = "10" or sig_speed = '1') then
                 sig_state <= WEST_GO;
               else
                 sig_state <= WEST_WAIT_STOP;
@@ -152,8 +160,13 @@ begin
             end if;
           
           when WEST_WAIT_STOP =>
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= WEST_WAIT_GO;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
             -- Count to 1 secs
-            if (sig_cnt < c_DELAY_1SEC) then
+            elsif (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
@@ -163,8 +176,13 @@ begin
             end if;
            
           when SOUTH_STOP =>
-            -- Count to 4 secs
-            if (sig_cnt < c_DELAY_2SEC) then
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= WEST_WAIT_GO;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
+            -- Count to 2 secs  
+            elsif (sig_cnt < c_DELAY_2SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
@@ -174,8 +192,13 @@ begin
             end if;
           
           when SOUTH_WAIT_GO =>
-            -- Count to 1 secs
-            if (sig_cnt < c_DELAY_1SEC) then
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= WEST_WAIT_GO;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
+            -- Count to 1 secs  
+            elsif (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
@@ -185,23 +208,28 @@ begin
             end if;
           
           when SOUTH_GO =>
-            -- Count to 4 secs
-            if (sig_cnt < c_DELAY_4SEC) then
+            -- Speed up to WEST GO when button is pressed
+            if (sig_speed = '1') then
+              sig_state <= SOUTH_WAIT_STOP;
+              sig_cnt <= c_ZERO;
+            -- Skip everything else
+            -- Count to 4 secs  
+            elsif (sig_cnt < c_DELAY_4SEC) then
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              sig_state <= SOUTH_WAIT_GO;
+              -- Don't move if there are no cars in the other direction
               if (sig_iscar = "01") then
-              sig_state <= SOUTH_GO;
+                sig_state <= SOUTH_GO;
               else
-              sig_state <= SOUTH_WAIT_STOP;
+                sig_state <= SOUTH_WAIT_STOP;
               end if;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
             
           when SOUTH_WAIT_STOP =>
-            -- Count to 1 secs
+            -- Count to 1 secs  
             if (sig_cnt < c_DELAY_1SEC) then
               sig_cnt <= sig_cnt + 1;
             else
@@ -210,7 +238,6 @@ begin
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
-
 
           when others =>
             -- It is a good programming practice to use the
