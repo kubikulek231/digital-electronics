@@ -136,7 +136,7 @@ p_traffic_fsm : process (clk) is
 
    ![waveform](images/waveform.png)
    
-> *For simpler simulation the case where there are cars in both direction only is considered.*
+> *For simpler simulation only the case where there are cars in both direction is considered.*
 
 
 3. Figure of Moor-based state diagram of the traffic light controller with *speed button* to ensure a synchronous transition to the `WEST_GO` state. The image can be drawn on a computer or by hand. Always name all states, transitions, and input signals!
