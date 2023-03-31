@@ -143,6 +143,6 @@ p_traffic_fsm : process (clk) is
 
    ![diagram](images/diagram.png)
 
-*Including iscar, speed inputs*
+> *Including iscar, speed inputs*
 
   
