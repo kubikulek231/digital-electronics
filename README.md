@@ -2,7 +2,7 @@
 
 Repository of homework and assignments from DE1 course at Brno University of Technology.
 
-Derived from *[here](https://github.com/tomas-fryza/digital-electronics-1.git)*.
+Repository contains my solutions only, full assignments can be found *[here](https://github.com/tomas-fryza/digital-electronics-1.git)*.
 
 
 **Homework**
